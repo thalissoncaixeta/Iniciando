@@ -1,1 +1,1 @@
-print("Cu de imbigo!")
+print("Hello, world!")
