@@ -131,7 +131,8 @@ class PlanejadorApp(tk.Tk):
         
         ttk.Label(frame_cal, text="Selecione uma data:", font=("Segoe UI", 12, "bold"), background="#ffffff").pack(anchor="w", pady=(0,10))
         
-        self.cal = Calendar(frame_cal, selectmode="day", date_pattern="yyyy-mm-dd", font="Segoe UI 10", 
+        # CORREÇÃO: fonte passada como tupla ("Segoe UI", 10)
+        self.cal = Calendar(frame_cal, selectmode="day", date_pattern="yyyy-mm-dd", font=("Segoe UI", 10), 
                             background="white", foreground="black", bordercolor="#e0e0e0",
                             headersbackground="#005b9f", headersforeground="white", 
                             selectbackground="#005b9f", selectforeground="white",
@@ -181,19 +182,20 @@ class PlanejadorApp(tk.Tk):
         self.campos = {}
         
         ttk.Label(form_frame, text="Data da Aula:", background="#ffffff").grid(row=0, column=0, sticky="w", pady=10)
-        self.campos['data'] = DateEntry(form_frame, width=15, background='#005b9f', foreground='white', borderwidth=0, date_pattern="yyyy-mm-dd", font="Segoe UI 10")
+        # CORREÇÃO: fonte passada como tupla
+        self.campos['data'] = DateEntry(form_frame, width=15, background='#005b9f', foreground='white', borderwidth=0, date_pattern="yyyy-mm-dd", font=("Segoe UI", 10))
         self.campos['data'].grid(row=0, column=1, sticky="w", padx=10)
         
         ttk.Label(form_frame, text="Turma:", background="#ffffff").grid(row=1, column=0, sticky="w", pady=10)
-        self.campos['turma'] = ttk.Combobox(form_frame, values=self.turmas_cadastradas, width=25, font="Segoe UI 10")
+        self.campos['turma'] = ttk.Combobox(form_frame, values=self.turmas_cadastradas, width=25, font=("Segoe UI", 10))
         self.campos['turma'].grid(row=1, column=1, sticky="w", padx=10)
 
         ttk.Label(form_frame, text="Disciplina:", background="#ffffff").grid(row=1, column=2, sticky="w", pady=10, padx=(30,0))
-        self.campos['disciplina'] = ttk.Combobox(form_frame, values=self.disciplinas_cadastradas, width=25, font="Segoe UI 10")
+        self.campos['disciplina'] = ttk.Combobox(form_frame, values=self.disciplinas_cadastradas, width=25, font=("Segoe UI", 10))
         self.campos['disciplina'].grid(row=1, column=3, sticky="w", padx=10)
 
         ttk.Label(form_frame, text="Categoria:", background="#ffffff").grid(row=2, column=0, sticky="w", pady=10)
-        self.campos['categoria'] = ttk.Combobox(form_frame, values=[c.value for c in CategoriaAula], state="readonly", width=40, font="Segoe UI 10")
+        self.campos['categoria'] = ttk.Combobox(form_frame, values=[c.value for c in CategoriaAula], state="readonly", width=40, font=("Segoe UI", 10))
         self.campos['categoria'].set(CategoriaAula.TEORICA.value)
         self.campos['categoria'].grid(row=2, column=1, columnspan=3, sticky="w", padx=10)
         self.campos['categoria'].bind("<<ComboboxSelected>>", self._toggle_campos_passeio)
@@ -204,11 +206,11 @@ class PlanejadorApp(tk.Tk):
         self.frame_passeio.grid_remove()
 
         ttk.Label(self.frame_passeio, text="Local do Passeio:", background="#ffffff").grid(row=0, column=0, sticky="w")
-        self.campos['nome_local'] = ttk.Entry(self.frame_passeio, width=25, font="Segoe UI 10")
+        self.campos['nome_local'] = ttk.Entry(self.frame_passeio, width=25, font=("Segoe UI", 10))
         self.campos['nome_local'].grid(row=0, column=1, padx=10)
         
         ttk.Label(self.frame_passeio, text="Endereço:", background="#ffffff").grid(row=0, column=2, sticky="w", padx=(20,0))
-        self.campos['endereco_local'] = ttk.Entry(self.frame_passeio, width=35, font="Segoe UI 10")
+        self.campos['endereco_local'] = ttk.Entry(self.frame_passeio, width=35, font=("Segoe UI", 10))
         self.campos['endereco_local'].grid(row=0, column=3, padx=10)
         
         self.campos['autorizacao_pais'] = tk.BooleanVar()
@@ -237,11 +239,11 @@ class PlanejadorApp(tk.Tk):
         form.pack(fill="x")
         
         ttk.Label(form, text="Turma Alvo:", background="#ffffff").grid(row=0, column=0, sticky="w", pady=10)
-        self.combo_turma_grade = ttk.Combobox(form, values=self.turmas_cadastradas, width=30, font="Segoe UI 10")
+        self.combo_turma_grade = ttk.Combobox(form, values=self.turmas_cadastradas, width=30, font=("Segoe UI", 10))
         self.combo_turma_grade.grid(row=0, column=1, sticky="w", padx=15, pady=10)
         
         ttk.Label(form, text="Disciplina:", background="#ffffff").grid(row=1, column=0, sticky="w", pady=10)
-        self.combo_disc_grade = ttk.Combobox(form, values=self.disciplinas_cadastradas, width=30, font="Segoe UI 10")
+        self.combo_disc_grade = ttk.Combobox(form, values=self.disciplinas_cadastradas, width=30, font=("Segoe UI", 10))
         self.combo_disc_grade.grid(row=1, column=1, sticky="w", padx=15, pady=10)
         
         dias_frame = ttk.LabelFrame(container, text="Dias da Semana", padding=15)
@@ -269,15 +271,15 @@ class PlanejadorApp(tk.Tk):
         form_evento.pack(fill="x", pady=(0, 15))
         
         ttk.Label(form_evento, text="Data:", background="#ffffff").grid(row=0, column=0, sticky="w", padx=5)
-        self.ev_data = DateEntry(form_evento, width=12, background='#005b9f', foreground='white', date_pattern="yyyy-mm-dd")
+        self.ev_data = DateEntry(form_evento, width=12, background='#005b9f', foreground='white', date_pattern="yyyy-mm-dd", font=("Segoe UI", 10))
         self.ev_data.grid(row=0, column=1, padx=5)
         
         ttk.Label(form_evento, text="Nome:", background="#ffffff").grid(row=0, column=2, sticky="w", padx=(10,5))
-        self.ev_nome = ttk.Entry(form_evento, width=20)
+        self.ev_nome = ttk.Entry(form_evento, width=20, font=("Segoe UI", 10))
         self.ev_nome.grid(row=0, column=3, padx=5)
         
         ttk.Label(form_evento, text="Tipo:", background="#ffffff").grid(row=0, column=4, sticky="w", padx=(10,5))
-        self.ev_tipo = ttk.Combobox(form_evento, values=[t.value for t in TipoEvento], state="readonly", width=12)
+        self.ev_tipo = ttk.Combobox(form_evento, values=[t.value for t in TipoEvento], state="readonly", width=12, font=("Segoe UI", 10))
         self.ev_tipo.set(TipoEvento.FERIADO.value)
         self.ev_tipo.grid(row=0, column=5, padx=5)
         
@@ -458,7 +460,7 @@ class PlanejadorApp(tk.Tk):
         try:
             with ARQUIVO_CONFIGURACAO.open("r", encoding="utf-8") as f:
                 dados = json.load(f)
-                # Script de Migração: Se o JSON for da versão antiga (Feriados em Dict livre)
+                # Script de Migração
                 if "feriados" in dados and isinstance(dados["feriados"], dict):
                     eventos_migrados = []
                     for data, nome in dados["feriados"].items():
@@ -466,13 +468,11 @@ class PlanejadorApp(tk.Tk):
                     dados["eventos"] = eventos_migrados
                     del dados["feriados"]
                 elif dados and not any(k in dados for k in ["eventos", "turmas", "disciplinas"]):
-                    # Versão mais antiga ainda
                     eventos_migrados = [{"data": d, "nome": n, "tipo": "Feriado"} for d, n in dados.items()]
                     return {"eventos": eventos_migrados}
                 return dados
         except: return {}
 
-    # (Métodos de interface do CRUD continuam com as novas chamadas do _marcar_calendario)
     def _toggle_campos_passeio(self, event=None):
         if self.campos['categoria'].get() == CategoriaAula.PASSEIO_CULTURA.value:
             self.frame_passeio.grid()
@@ -538,7 +538,7 @@ class PlanejadorApp(tk.Tk):
             
         self._salvar_agenda()
         self._atualizar_lista()
-        self._marcar_calendario() # Atualiza as cores do calendário
+        self._marcar_calendario() 
         self._limpar_form()
         messagebox.showinfo("Sucesso", "Planejamento salvo com sucesso!")
         self.notebook.select(self.aba_agenda)
@@ -591,7 +591,6 @@ class PlanejadorApp(tk.Tk):
         data_atual = date.today()
         aulas_geradas = 0
         
-        # Coleta dias que são feriados/recessos para o gerador ignorar
         dias_bloqueados = [e["data"] for e in self.eventos_especiais if e["tipo"] in [TipoEvento.FERIADO.value, TipoEvento.RECESSO.value]]
         
         for i in range(60):
@@ -653,7 +652,7 @@ class PlanejadorApp(tk.Tk):
             pdf.setFont("Helvetica-Bold", 14)
             y = 800
             for linha in texto_relatorio.splitlines():
-                pdf.drawString(50, y, linha[:100]) # Prevenção contra quebra de linha longa
+                pdf.drawString(50, y, linha[:100])
                 y -= 20
             pdf.save()
             messagebox.showinfo("Sucesso", "Relatório PDF gerado com sucesso!")
